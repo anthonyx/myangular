@@ -1,0 +1,79 @@
+Notes:
+
+  basic terminal commands: https://gist.github.com/poopsplat/7195274
+
+  how do we run this code through the debugger?
+    use browserify: https://github.com/browserify/browserify-handbook#introduction
+
+    cannot install browserify globally to use in command line
+    instead, we install a node version manager, in this case from here: https://github.com/creationix/nvm#installation
+
+    we can use node --inspect-brk [filepath/name]
+    this will create a debugger page
+    then we go to chrome://inspect
+    choose the 
+
+    use karma link to debug the code
+    we can use source maps to go straight to the original code and step through it
+
+
+
+    Debugging video explanation:
+
+      Explain the context
+        Node.js
+          loading libraries/modules
+        testing framework
+        cannot run in chrome
+
+      Explain the problem
+
+      How the book club runs tests
+        We use karma, a test runner
+        We preprocess the code using browserify so node functions can be used in the browser
+        We then run the tests via phantom js, a browser that helps with unit testing
+
+      Explain the solution
+
+
+
+
+      The problem - We are running our code with various dependencies and the code is written with Node.js which is how we are loading modules and we are using a testing framework like Jasmine. As such, we are unable to directly run this code in the browser and cannot debug using Chrome
+        Demonstrate the problem
+
+
+
+
+
+      With karma: we have a way to run jasmine code, it runs it as a regular Node.js module
+        Karma starts by loading plugins and configuration file
+          all preprocessors, browser launchers, and frameworks are plugins
+          karma plugins are using npm modules so we can install them as project dependencies via the package.json
+        then it starts a local web server
+        browsers will connect to this webserver
+        once connected, it will open a context.html file which contains testing framework adapter, source code and test code
+        testing framework adapter takes over and runs tests
+        We have installed phantomJS which helps us run the code in a browser without the need for a browser
+          confirm this!!?
+        However, we can access the webserver via this URL:http://localhost:9876/
+
+      With browserify: we can convert the Node.js code to browser friendly code
+        Browsers natively don't have the require method predefined like nodeJS does
+        With browserify, it will automatically trace all the dependencies within your JS file
+        By adding debug flag, you will gain the ability to use source maps
+
+
+      With phantomJS: we can run the code without a browser and that's how our tests are run
+
+      See how tests fail and how we can activate the debugger
+
+      
+
+
+
+
+
+
+
+
+  
